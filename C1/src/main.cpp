@@ -1,10 +1,12 @@
 #include <iostream>
 #include "fraction.hpp"
 
+
 int main()
 {
     Fraction f1 { 3, 4 };
     Fraction f2 { 1, 2 };
+    int i=3;
 
     std::cout << "f1 = ";
     f1.display();
@@ -36,6 +38,41 @@ int main()
     Fraction {Fraction {1, 6} + Fraction {2, 6}}.display();
     //std::cout << Fraction {Fraction {1, 6} + Fraction {2, 6}};
 
+    // std::cout << std::endl;
+    // if (Fraction{2, 4} == Fraction{1, 2} ){
+    //     std::cout << "f1 et f2 sont égaux";
+    // }
+    // else {
+    //     std::cout << "f1 et f2 ne sont pas égaux";
+    // }
+    std::cout << std::endl;
+    if (Fraction{3, 4} != Fraction{1, 2} ){
+        std::cout << "f1 et f2 ne sont pas égaux";
+    }
+    else {
+        std::cout << "f1 et f2 sont égaux";
+    }
+
+    std::cout << std::endl;
+    if (Fraction{3, 4} < Fraction{1, 2} ){
+        std::cout << "f1 est plus petite que f2 ";
+    }
+    else {
+        std::cout << "f1 est plus grande que f2";
+    }
+
+    std::cout << std::endl << "f1/=f2 =";
+    std::cout << Fraction {f1/=f2};
+
+    std::cout << std::endl << "conv float :" ;
+    // std::cout << to_float(Fraction {10, 3});
+    std::cout << static_cast <float> (Fraction {10, 3});
+
+    std::cout << std::endl << "add(f1+i =)";
+    //std::cout << f1+i;
+    std::cout << i+f1;
+
+    
 
     return 0;
 }

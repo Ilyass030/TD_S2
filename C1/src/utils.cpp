@@ -31,3 +31,4 @@ Fraction simplify(Fraction const& f) {
         f.denominator / divisor
     };
 }
+
