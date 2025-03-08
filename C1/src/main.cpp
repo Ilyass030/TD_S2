@@ -68,11 +68,20 @@ int main()
     // std::cout << to_float(Fraction {10, 3});
     std::cout << static_cast <float> (Fraction {10, 3});
 
-    std::cout << std::endl << "add(f1+i =)";
+    std::cout << std::endl << "add(i/f1) = ";
     //std::cout << f1+i;
-    std::cout << i+f1;
+    std::cout << i/f1;
 
-    
+    std::cout << std::endl << "abs(-1/2) = ";
+    std::cout << abs(Fraction {-1,2});
 
+    std::cout << std::endl << "arrondi supp(-1/2) = ";
+    std::cout << ceil(Fraction {-1,2});
+
+    std::cout << std::endl << "arrondi inf(-1/2) = ";
+    std::cout << floor(Fraction {-1,2});
+
+    // std::cout << std::endl << "arrondi (10/3) = ";
+    // std::cout << floor(Fraction {10,-3});
     return 0;
 }

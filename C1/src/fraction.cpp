@@ -135,7 +135,6 @@ Fraction operator+(Fraction const& f, int const i){
         f.numerator+i*f.denominator,
         f.denominator});
 }
-
 Fraction operator+(int const i, Fraction const& f){
     return f+i;
 }
@@ -145,9 +144,60 @@ Fraction operator-(Fraction const& f, int const i){
         f.numerator-i*f.denominator,
         f.denominator});
 }
-
 Fraction operator-(int const i, Fraction const& f){
     return simplify({
         -(f.numerator-i*f.denominator),
         f.denominator});
+}
+
+Fraction operator*(Fraction const& f, int const i){
+    return simplify({
+        f.numerator*i,
+        f.denominator});
+}
+Fraction operator*(int const i, Fraction const& f){
+    return f*i;
+}
+
+Fraction operator/(Fraction const& f, int const i){
+    return simplify({
+        f.numerator,
+        f.denominator*i});
+}
+Fraction operator/(int const i, Fraction const& f){
+    return simplify({
+        f.denominator*i,
+        f.numerator});
+}
+
+
+float Fraction::abs(){
+    if (float() <0){
+        return -1*(float());
+    }
+    return float();
+}
+
+int Fraction::ceil(){
+    if(float() >=0){
+        return static_cast<int> (float()) +1;
+    }
+    return static_cast<int> (float());
+}
+
+int Fraction::floor(){
+    return ceil()-1;
+}
+
+// int Fraction::round(){
+//     if(abs()-floor()>=0.5 && float()>=0){
+//         return ceil();
+//     }
+//     else if(abs()+floor()>=0.5 && float()<0){
+//         return ceil();
+//     }
+//     // else if(abs()-floor()<0.5 && float()>=0){
+//     //     return floor();
+//     // }
+//     return floor();
 }

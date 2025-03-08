@@ -4,12 +4,16 @@
 
 
 struct Fraction {
-    unsigned int numerator;
-    unsigned int denominator;
+     int numerator;
+     int denominator;
 
     void display();
 
     operator float() const;
+    float abs();
+    int ceil(); //arrondi supp
+    int floor(); //arrondi inf
+    int round(); //arrondi en fct si le 10ème est > à 5
 };
 
 float to_float (Fraction const& f1);
@@ -45,3 +49,4 @@ Fraction operator/=(Fraction& f1, Fraction const& f2);
 
 Fraction operator+(Fraction const& f, int const i);
 Fraction operator+(int const i, Fraction const& f);
+
