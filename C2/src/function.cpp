@@ -112,6 +112,14 @@ std::vector<Token> tokenize(std::vector<std::string> const& words){
                 tokens.push_back(make_token(Operator::POW));
                 continue;
             }
+            else if (str =="("){
+                tokens.push_back(make_token(Operator::OPEN_PAREN));
+                continue;
+            }
+            else if (str ==")"){
+                tokens.push_back(make_token(Operator::CLOSE_PAREN));
+                continue;
+            }
         }
     }
     return tokens;
@@ -168,9 +176,9 @@ float npi_evaluate(std::vector<Token> const& tokens){
 
 size_t operator_precedence(Operator const op){
     if (op == Operator::OPEN_PAREN){
-        return 1;
+        return 6;
     }
-    else if (op == Operator::ADD || op == Operator::ADD){
+    else if (op == Operator::ADD || op == Operator::SUB){
         return 2;
     }
     else if (op == Operator::MUL || op == Operator::DIV){
@@ -179,7 +187,7 @@ size_t operator_precedence(Operator const op){
     else if (op == Operator::POW){
         return 4;
     }
-    else if (op == Operator::CLOSE_PAREN){
+    else {
         return 5;
     }
 }
@@ -193,16 +201,17 @@ std::vector<Token> infix_to_npi_tokens(std::string const& expression){
             resp.push_back(t);
         }
         else{
-            if (operator_precedence(t.op)== 1){
+            if (operator_precedence(t.op)== 6){
                 pile_op.push(t);
             }
             else if(operator_precedence(t.op)== 5){
-                while(operator_precedence(pile_op.top().op)!= 1){
-                    resp.push_back(t);
+                while(operator_precedence(pile_op.top().op)!= 6){
+                    resp.push_back(pile_op.top());
+                    pile_op.pop();
                 }
                 pile_op.pop();
             }
-            else if (operator_precedence(t.op) > operator_precedence(pile_op.top().op)){ 
+            else if (size(pile_op)!=0 && operator_precedence(t.op) > operator_precedence(pile_op.top().op)){ 
                 resp.push_back(t);
             }
             else {
@@ -217,7 +226,7 @@ std::vector<Token> infix_to_npi_tokens(std::string const& expression){
 std::string npi_string (std::vector<Token> npi){
     std::string str{};
     for (Token t : npi){
-        str+=t.value;
+        str+=std::to_string(t.value);
     }
     return str;
 }
