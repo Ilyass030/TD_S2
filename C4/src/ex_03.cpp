@@ -1,6 +1,7 @@
 #include "function.hpp"
 
 
+
 int main(){
     std::string str{"akayak"};
     if (is_palindrome(str)){

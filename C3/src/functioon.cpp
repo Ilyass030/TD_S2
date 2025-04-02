@@ -137,3 +137,26 @@ void merge_sort_merge(std::vector<float> &vec, size_t left, size_t middle, size_
     std::copy(interm.begin(), interm.end(), vec.begin() + left);
     //std::cout<<"ouii!"<<std::endl;
 }
+
+// std::vector <int>interm{1, 2, 2, 3, 4, 8, 12};
+int search(std::vector<int>& vec, int x, size_t left, size_t right){
+    if (left > right) return -1;
+    // size_t left = 0;
+    // size_t right =  vec.size();
+    int middle=(left+right)/2;
+    // while (vec[middle] < x){ //en itirative
+    //     left=middle;
+    //     middle=(left+right)/2;
+    // }
+    // if (vec[middle]==x) return middle;
+    //en recu
+    // while (right!=left && middle !=x){
+    if (vec[middle]==x)return middle;
+    
+    else if(vec[middle]<x){
+        return search(vec,x,middle,right);
+    }
+    else {return search(vec,x,left,middle);}
+    //else return -1;
+    // }
+}

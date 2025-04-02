@@ -17,3 +17,5 @@ void merge_sort(std::vector<float> & vec, size_t const left, size_t const right)
 void merge_sort(std::vector<float> & vec) {
     merge_sort(vec, 0, vec.size() - 1);
 }
+
+int search(std::vector<int>& vec, int x, size_t left, size_t right);
