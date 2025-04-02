@@ -1,6 +1,7 @@
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
+#include <iostream>
 
 
 
@@ -61,10 +62,11 @@ void merge_sort_merge(std::vector<float> &vec, size_t left, size_t middle, size_
 void merge_sort(std::vector<float> &vec, size_t left, size_t right) {
     if (left >= right) return; // Condition d'arrêt correcte
 
-    size_t middle = left + (right - left) / 2; // Calcul correct du milieu
-
+    size_t middle = (left + right) / 2; // Calcul correct du milieu
+    //std::cout<<"division"<<std::endl;
     merge_sort(vec, left, middle);      // Tri de la moitié gauche
     merge_sort(vec, middle + 1, right); // Tri de la moitié droite
+    //std::cout<<"fusion"<<std::endl;
     merge_sort_merge(vec, left, middle , right); // Fusion des deux moitiés
 }
 
@@ -104,9 +106,10 @@ void merge_sort(std::vector<float> &vec, size_t left, size_t right) {
 // }
 void merge_sort_merge(std::vector<float> &vec, size_t left, size_t middle, size_t right) {
     std::vector<float> interm;
-    interm.reserve(right - left + 1); // Optimisation pour éviter les reallocations
+    //interm.reserve(right - left + 1); // Optimisation pour éviter les reallocations
 
     size_t i = left, j = middle+1;
+    size_t k =  left;
 
     while (i <= middle && j <= right) {
         if (vec[i] > vec[j]) {
@@ -129,8 +132,8 @@ void merge_sort_merge(std::vector<float> &vec, size_t left, size_t middle, size_
         interm.push_back(vec[j]);
         j++;
     }
-
+    //std::cout<<"ca marche??"<<std::endl;
     // Copier les valeurs triées dans le vecteur d'origine
     std::copy(interm.begin(), interm.end(), vec.begin() + left);
-    
+    //std::cout<<"ouii!"<<std::endl;
 }

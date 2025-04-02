@@ -13,9 +13,9 @@ std::string string_NPI {"3 4 2 ^ 1 5 - 6 ^ / +"};
 //std::cout<<std::endl;
 
 
-std::vector<std::string> tokens {split_string (string_NPI)};
-std::cout<<"(meth ex1) -> le resutat de votre npi est : "<<npi_evaluate(tokens)<<std::endl;
-std::cout<<std::endl;
+// std::vector<std::string> tokens {split_string (string_NPI)};
+// std::cout<<"(meth ex1) -> le resutat de votre npi est : "<<npi_evaluate(tokens)<<std::endl;
+// std::cout<<std::endl;
 
 // //Ex2
 // std::cout<<"(meth ex2) -> le resutat de votre npi est : "<<npi_evaluate(tokenize(tokens))<<std::endl;

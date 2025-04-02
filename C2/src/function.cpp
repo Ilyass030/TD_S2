@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <iterator>
+#include <cassert>
 #include <stack>
 #include "function.hpp"
 
@@ -175,10 +176,7 @@ float npi_evaluate(std::vector<Token> const& tokens){
 //*******Ex_3************//
 
 size_t operator_precedence(Operator const op){
-    if (op == Operator::OPEN_PAREN){
-        return 6;
-    }
-    else if (op == Operator::ADD || op == Operator::SUB){
+    if (op == Operator::ADD || op == Operator::SUB){
         return 2;
     }
     else if (op == Operator::MUL || op == Operator::DIV){
@@ -187,37 +185,42 @@ size_t operator_precedence(Operator const op){
     else if (op == Operator::POW){
         return 4;
     }
-    else {
-        return 5;
-    }
+    return 0;
+    assert(false);
 }
 
 std::vector<Token> infix_to_npi_tokens(std::string const& expression){
     std::vector<Token> resp;
     std::stack<Token> pile_op;
     //int deg;
-    for (Token t:tokenize(split_string(expression))){
+    auto const tokens = tokenize(split_string(expression));
+    for (Token t:tokens){
         if (t.type == TokenType::OPERAND){
             resp.push_back(t);
         }
         else{
-            if (operator_precedence(t.op)== 6){
+            if (t.op== Operator::OPEN_PAREN){
                 pile_op.push(t);
             }
-            else if(operator_precedence(t.op)== 5){
-                while(operator_precedence(pile_op.top().op)!= 6){
+            else if(t.op== Operator::CLOSE_PAREN){
+                while(pile_op.top().op!= Operator::OPEN_PAREN){
                     resp.push_back(pile_op.top());
                     pile_op.pop();
                 }
                 pile_op.pop();
             }
-            else if (size(pile_op)!=0 && operator_precedence(t.op) > operator_precedence(pile_op.top().op)){ 
-                resp.push_back(t);
-            }
-            else {
+            else { 
+                while (size(pile_op)!=0 && operator_precedence(t.op) <= operator_precedence(pile_op.top().op)){
+                    resp.push_back(pile_op.top());
+                    pile_op.pop();
+                }
                 pile_op.push(t);
             }
         }
+    }
+    while (size(pile_op)!=0){
+        resp.push_back(pile_op.top());
+        pile_op.pop();
     }
     return resp;
 
@@ -226,7 +229,25 @@ std::vector<Token> infix_to_npi_tokens(std::string const& expression){
 std::string npi_string (std::vector<Token> npi){
     std::string str{};
     for (Token t : npi){
-        str+=std::to_string(t.value);
+        if(t.type==TokenType::OPERATOR && t.op==Operator::ADD){
+            str+="+ ";
+        }
+        else if(t.type==TokenType::OPERATOR && t.op==Operator::SUB){
+            str+="- ";
+        }
+        else if(t.type==TokenType::OPERATOR && t.op==Operator::MUL){
+            str+="* ";
+        }
+        else if(t.type==TokenType::OPERATOR && t.op==Operator::DIV){
+            str+="/ ";
+        }
+        else if(t.type==TokenType::OPERATOR && t.op==Operator::POW){
+            str+="^ ";
+        }
+        else{
+            str+=std::to_string(t.value);
+            str+=' ';
+        }
     }
     return str;
 }

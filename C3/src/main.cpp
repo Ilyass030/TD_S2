@@ -8,7 +8,7 @@ int main()
     // std::vector<int> array{2, 8, 5, 4, 1, 6, 7, 3, 9};
     std::vector<int> array{generate_random_vector(100,100)};
 
-    // std::vector<float> array_f{2, 8, 5, 4, 1, 6, 7, 3, 9};
+    //std::vector<float> array_f{9,5,32,5,90,4,12,56,8,43};
     std::vector<float> array_f{generate_random_vector_f(100,100)};
 
     //*********Ex1*********//
@@ -16,14 +16,23 @@ int main()
         ScopedTimer timer("chrono tri à bulme");
         bubble_sort(array);
     }
+    //std::cout<<"marche?";
     {
         ScopedTimer timer("chrono tri fusion");
         merge_sort(array_f,0,array_f.size());
     }
+    // for(float x:array_f){
+    //     std::cout<<x<<",";
+    // }
+    // std::cout<<std::endl;
 
+    merge_sort(array_f);
+
+    // for(float x:array_f){
+    //     std::cout<<x<<",";
+    // }
     
-    
-    if (is_sorted(array))
+    if (is_sorted(array_f))
     {
         std::cout << "Le tableau est trié" << std::endl;
     }
