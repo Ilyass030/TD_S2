@@ -31,9 +31,20 @@ std::vector<std::string> split_string(std::string const& str){
     return vec;
 }
 
-bool is_palindrome(std::string str){
+bool is_palindrome(std::string& str){
     // for(auto it:str){
     //     if()
     // }
     return std::equal(str.begin(),str.end(),str.rbegin());
+}
+
+int sum_square(std::vector<int>const& vec){
+    int sum { std::accumulate(vec.begin(), vec.end(), 0, [](int acc, int current_element) { return acc + std::pow(current_element,2); }) };
+    return sum;
+}
+
+int sum_even(std::vector<int>const& vec){
+    int sum { std::accumulate(vec.begin(), vec.end(), 1, [](int acc, int current_element) { if (current_element%2==
+    0){return acc * current_element; } return acc;} )};
+    return sum;
 }
